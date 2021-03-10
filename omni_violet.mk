@@ -16,12 +16,18 @@
 
 # Release name
 PRODUCT_RELEASE_NAME := violet
+DEVICE_PATH := device/xiaomi/violet
 
-$(call inherit-product, build/target/product/embedded.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/omni/config/common.mk)
 
+
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(DEVICE_PATH)/recovery/root,recovery/root) \
+    $(DEVICE_PATH)/prebuilt/dtbo:dtbo.img
+	
+	
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := violet
 PRODUCT_NAME := omni_violet
